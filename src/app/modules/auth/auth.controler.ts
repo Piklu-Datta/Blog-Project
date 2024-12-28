@@ -5,7 +5,6 @@ import httpStatus from 'http-status';
 
 const loginUser = catchAsync(async (req, res) => {
   const result = await authServices.loginUser(req.body);
-  //console.log(result);
   const { accessToken } = result;
 
   sendResponse(res, {

@@ -7,7 +7,6 @@ import Create from './auth.utils';
 
 const loginUser = async (payload: TLogin) => {
   const user = await RegisteredUser.isUserExistByEmail(payload?.email);
-  //console.log(user);
   if (!user) {
     throw new AppError(httpStatus.UNAUTHORIZED, 'Invalid credential');
   }
@@ -23,7 +22,6 @@ const loginUser = async (payload: TLogin) => {
     userId: user._id,
     userEmail: user?.email,
   };
-  //console.log(jwtPayload);
   const accessToken = Create(
     jwtPayload,
     config.jwt_excess_secret as string,

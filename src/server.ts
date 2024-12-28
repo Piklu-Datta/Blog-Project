@@ -32,5 +32,3 @@ process.on('uncaughtException', () => {
 });
 
 main();
-//console.log(x);
-//Promise.reject();
