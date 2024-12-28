@@ -10,9 +10,7 @@ const createBlog = catchAsync(async (req, res) => {
     content,
     author: req.user.userId,
   };
-  //console.log(blog);
   const result = await blogServices.createBlogIntoDb(blog);
-  //console.log(result);
   sendResponse(res, {
     success: true,
     message: 'Blog created successfully',

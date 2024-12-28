@@ -5,6 +5,6 @@ export type TBlog = {
   content: string;
   author: Types.ObjectId;
   isPublished?: boolean;
-  createdAt?: Date; // Optional field, added automatically
-  updatedAt?: Date; // Optional field, added automatically
+  createdAt?: Date;
+  updatedAt?: Date;
 };

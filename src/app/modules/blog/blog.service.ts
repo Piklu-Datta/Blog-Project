@@ -37,7 +37,6 @@ const updateBlogFromDb = async (
       select: 'name email',
     })
     .select('-isPublished -createdAt -updatedAt -__v');
-  //console.log(result);
   return result;
 };
 const deleteBlogFromDb = async (id: string, isUserId: string) => {
