@@ -8,7 +8,7 @@ export interface TUser {
   isBlocked: boolean;
 }
 export interface TUserDocument extends TUser, Document {
-  _id: Types.ObjectId; // Explicitly include `_id`
+  _id: Types.ObjectId;
 }
 
 export interface UserModel extends Model<TUserDocument> {
