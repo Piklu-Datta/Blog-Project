@@ -3,7 +3,6 @@
 import { ErrorRequestHandler } from 'express';
 import { TError } from '../interface/error';
 import AppError from '../errors/appError';
-import config from '../config';
 import { ZodError } from 'zod';
 import handleZodError from '../errors/handleZodError';
 import handleValidationError from '../errors/handleValidationError';
@@ -58,7 +57,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     message,
     statusCode,
     error,
-    stack: config.NODE_ENV === 'development' ? err?.stack : null,
+    stack: err?.stack,
   });
 };
 
