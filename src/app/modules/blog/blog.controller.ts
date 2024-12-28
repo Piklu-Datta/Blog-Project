@@ -27,8 +27,10 @@ const createBlog = catchAsync(async (req, res) => {
 });
 
 const updateBlog = catchAsync(async (req, res) => {
+  const isUserId = req.user?.userId;
+
   const { id } = req.params;
-  const result = await blogServices.updateBlogFromDb(id, req.body);
+  const result = await blogServices.updateBlogFromDb(id, isUserId, req.body);
 
   sendResponse(res, {
     success: true,
@@ -39,8 +41,9 @@ const updateBlog = catchAsync(async (req, res) => {
 });
 
 const deleteBlog = catchAsync(async (req, res) => {
+  const isUserId = req.user?.userId;
   const { id } = req.params;
-  await blogServices.deleteBlogFromDb(id);
+  await blogServices.deleteBlogFromDb(id, isUserId);
   sendResponse(res, {
     success: true,
     message: 'Blog deleted successfully',

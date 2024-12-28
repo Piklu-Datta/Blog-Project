@@ -1,8 +1,9 @@
 import QueryBuilder from '../../builders/QueryBuilder';
+import AppError from '../../errors/appError';
 import { searchableFields } from './blog.constant';
 import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
-
+import httpStatus from 'http-status';
 const createBlogIntoDb = async (payload: TBlog) => {
   const result = await Blog.create(payload);
   await result.populate({
@@ -13,7 +14,20 @@ const createBlogIntoDb = async (payload: TBlog) => {
   return result;
 };
 
-const updateBlogFromDb = async (id: string, payload: Partial<TBlog>) => {
+const updateBlogFromDb = async (
+  id: string,
+  isUserId: string,
+  payload: Partial<TBlog>,
+) => {
+  const blog = await Blog.findById(id).select('author');
+
+  if (!blog) {
+    throw new Error('Blog not found');
+  }
+
+  if (blog.author.toString() !== isUserId) {
+    throw new AppError(httpStatus.UNAUTHORIZED, 'You can not update the blog');
+  }
   const result = await Blog.findByIdAndUpdate(id, payload, {
     new: true,
     runValidators: true,
@@ -26,7 +40,16 @@ const updateBlogFromDb = async (id: string, payload: Partial<TBlog>) => {
   //console.log(result);
   return result;
 };
-const deleteBlogFromDb = async (id: string) => {
+const deleteBlogFromDb = async (id: string, isUserId: string) => {
+  const blog = await Blog.findById(id).select('author');
+
+  if (!blog) {
+    throw new Error('Blog not found');
+  }
+
+  if (blog.author.toString() !== isUserId) {
+    throw new AppError(httpStatus.UNAUTHORIZED, 'You can not delete the blog');
+  }
   const result = await Blog.findByIdAndDelete(id);
   return result;
 };
