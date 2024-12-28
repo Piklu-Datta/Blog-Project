@@ -10,7 +10,7 @@ const createBlogIntoDb = async (payload: TBlog) => {
     path: 'author',
     select: 'name email',
   });
-  //console.log(result);
+
   return result;
 };
 
