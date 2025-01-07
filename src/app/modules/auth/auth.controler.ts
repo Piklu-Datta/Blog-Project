@@ -12,7 +12,7 @@ const loginUser = catchAsync(async (req, res) => {
     message: 'Login successfully',
     statusCode: httpStatus.OK,
     data: {
-      token: `Bearer ${accessToken}`,
+      token: accessToken,
     },
   });
 });
