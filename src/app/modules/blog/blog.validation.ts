@@ -7,7 +7,7 @@ const blogValidationSchema = z.object({
       .max(30)
       .regex(
         /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/,
-        'Each word in the name must start with a capital letter',
+        'Each word in the title must start with a capital letter',
       ),
     content: z.string({
       required_error: 'content is required',
@@ -23,7 +23,7 @@ const updatedValidationSchema = z.object({
       .max(30)
       .regex(
         /^[A-Z][a-z]*(?: [A-Z][a-z]*)*$/,
-        'Each word in the name must start with a capital letter',
+        'Each word in the title must start with a capital letter',
       )
       .optional(),
     content: z
